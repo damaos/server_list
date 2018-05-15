@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <title>Nuevo servidor</title>
+</head>
+<body>
+    <div class="text-center">
+            <h1> <span class="badge badge-secondary">Administrar Servidor</span></h1>
+            
+    </div>
+    <br><br>
+    <div class="container ">
+        <form class="col-md-12" enctype="multipart/form-data" method="POST" novalidate>
+            {% csrf_token %}
+                <div class="row">	
+                    		          
+                    {% for field in form %}
+                        <div class="col-md-4">
+                            <label for="{{field.name}}">{{field.label}}</label><br>
+                            {{field}}
+                            {% for error in field.errors %}
+                            <ul>
+                                <li class="error">{{error}}</li>
+                            </ul>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="text-center"><br>
+                        <button class="btn btn-ingresar" type="submit">Guardar</button>
+                        <a class="btn  btn-outline-danger" href="{% url 'products:index' %}" role="button">Cancelar</a>
+                </div>
+        </form>      
+</div><br>
+<footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text"></h5>
+                    <p class="grey-text text-lighten-4"></p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text"></h5>
+                    <br>
+                    <ul>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center-align">
+                  <h6> Copyright © 2018 Medellín | Colombia | Gerencia de Ingeniería y Desarrollo Emtelco S.A.S</h6> 
+            </div>
+        </div>
+    </footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </body>
+</html>

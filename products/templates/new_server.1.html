@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crear nuevo servidor</title>
+</head>
+<body>
+    <section id="main-container">
+        <div class="container">
+          <div class="row">
+            <div class="col s10"></div>
+              <div class="row">
+                <div class="col m5 hide-on-small-only">
+                </div>
+                  <div class="row">
+                    <div class="signup-box">
+                        <form class="col s12" action="" enctype="multipart/form-data" method="POST" novalidate>
+                             {% csrf_token %}
+                            <div class="row">
+                           <div class="col-md-12">					          
+                              {% for field in form %}
+                            <div class="form-group">
+                            <label for="{{field.name}}">{{field.label}}</label> 
+                            {{ field}} 
+                            {% for error in field.errors %}
+                            <ul>
+                                <li class="error">{{error}}</li>
+                            </ul>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        <button class="btn btn-ingresar" type="submit">Guardar</button>
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+    <footer class="page-footer blue">
+            <div class="container">
+              <div class="row">
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+              <div>
+                  <h6 class="center align">
+                Copyright © 2018 Medellín | Colombia | Gerencia de Ingeniería y Desarrollo Emtelco S.A.S
+                </h6>
+                </div>
+              </div>
+            </div>
+          </footer>
+          <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>        
+</body>
+</html>

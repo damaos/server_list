@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+     {% for pr in object_list %}
+    <title>{{ object.name}}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <h1>{{ object.name }}</h1>
+    
+
+    <p>
+        {{ product.tipe }}
+        
+    </p>
+     {% endfor %}
+    
+</body>
+</html>

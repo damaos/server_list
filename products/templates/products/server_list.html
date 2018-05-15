@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+   <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Administracion de Servidores</title>
+  	<!-- CSS  -->
+ 	<!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	  {% if user.is_authenticated %}
+  		<nav class="light-blue lighten-1" role="navigation">
+    		<div class="nav-wrapper container">
+						Bienvenido {{ user.username }}
+				<ul class="right hide-on-med-and-down">
+        		<li><a href="{% url "products:logout" %}">Salir</a></li>
+						<li><a href="{% url "products:new" %}">Crear nuevo servidor</a></li>
+				</ul>
+		 {% else %}
+		 <nav class="light-blue lighten-1" role="navigation">
+		 	<div class="nav-wrapper container">
+		 		<ul class="rigth hide-on-med-and-down">
+		 			<li><span><br /></span></li>
+          <li><a href="{% url "products:authentication" %}">Inicia una sesion </a></li>
+		 		</ul>
+		 		</div>
+		 			</nav>
+         {% endif %}
+    		</div>
+				</nav>
+				<br>
+				<br>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+	  		<div>
+	  			<h5 class="center-align">
+     				<form method="GET" class="search" >
+							<div class="col-md-6 float margin">
+								<input type='text' name='q' id="q" placeholder='¿Qué desea buscar?' value='{{request.GET.q}}'class="form-control search"/>
+								<input type="submit" value="Buscar" class="btn">
+							</div>						        
+						</form>
+					</h5>
+				</div>
+		</div>	
+      <div class="row center">
+        <h5 class="header col s12 light">listado de servidores que prestan servicios</h5> 
+			</div>
+			{% if user.is_authenticated %}
+		 <table class="highlight responsive-table">
+			<thead>
+				<tr>
+					<th><h5>NOMBRE</h5></th>
+					<th><h5>CLIENTE</h5></th>
+					<th><h5>TIPO</h5></th>
+					<th><h5>INTERFAZ</h5></th>
+					<th><h5>VIRTUALIZACION</h5></th>
+					<th><h5>PLATAFORMA</h5></th>
+					<th><h5>SISTEMA </h5></th>
+					<th><h5>MODELO</h5></th>
+					<th><h5>SERVICIOS</h5></th>
+					<th><h5>CIUDAD</h5></th>
+					<th><h5>SEDE</h5></th>
+					<th><h5>RACK</h5></th>
+				</tr>
+			</thead>
+				<tbody> 
+				<tr>
+					{% for pr in object_list %}
+					
+					<td> {{ pr.name }} <a href="{% url 'products:delete' pk=pr.pk %}"><i class=" tiny material-icons">delete</i>	</a><a href="{% url 'products:update' pr.pk %}"><i class="tiny material-icons">border_color</i>	</a></td>  
+					<td> {{ pr.client }} </td>
+					<td> {{ pr.tipe }} </td>
+					<td> {{ pr.interface }} </td>
+					<td> {{ pr.virtual }} </td>
+					<td> {{ pr.platform }} </td>
+					<td> {{ pr.system_operative }} </td>
+					<td> {{ pr.model }} </td>
+					<td> {{ pr.service }} </td>
+					<td> {{ pr.city }} </td>
+					<td> {{ pr.seat }} </td>
+					<td> {{ pr.rack }} </td>
+				</tbody>
+			{% endfor %}
+			</table>
+		
+	</div>
+								{% else %}
+									<table class="highlight responsive-table">
+											<thead>
+												<tr>
+													<th><h5>NOMBRE</h5></th>
+													<th><h5>CLIENTE</h5></th>
+													<th><h5>TIPO</h5></th>
+													<th><h5>INTERFAZ</h5></th>
+													<th><h5>VIRTUALIZACION</h5></th>
+													<th><h5>PLATAFORMA</h5></th>
+													<th><h5>SISTEMA </h5></th>
+													<th><h5>MODELO</h5></th>
+													<th><h5>SERVICIOS</h5></th>
+													<th><h5>CIUDAD</h5></th>
+													<th><h5>SEDE</h5></th>
+													<th><h5>RACK</h5></th>
+												</tr>
+												</thead>
+												<tbody> 
+													<tr>
+													{% for pr in object_list %}
+													<td> {{ pr.name }}</td>  
+													<td> {{ pr.client }} </td>
+													<td> {{ pr.tipe }} </td>
+													<td> {{ pr.interface }} </td>
+													<td> {{ pr.virtual }} </td>
+													<td> {{ pr.platform }} </td>
+													<td> {{ pr.system_operative }} </td>
+													<td> {{ pr.model }} </td>
+													<td> {{ pr.service }} </td>
+													<td> {{ pr.city }} </td>
+													<td> {{ pr.seat }} </td>
+													<td> {{ pr.rack }} </td>
+													</tbody>
+													{% endfor %}
+													</table>
+													</div>
+													{% endif %}
+													<br><br>
+					<footer class="page-footer">
+					<div class="container">
+						<div class="row">
+							<div class="col l6 s12">
+								<h5 class="white-text"></h5>
+								<p class="grey-text text-lighten-4"></p>
+							</div>
+							<div class="col l4 offset-l2 s12">
+								<h5 class="white-text"></h5>
+								<br>
+								<ul>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="footer-copyright">
+						<div class="container center-align">
+								Copyright © 2018 Medellín | Colombia | Gerencia de Ingeniería y Desarrollo Emtelco S.A.S
+						</div>
+					</div>
+				</footer>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </body>
+</html>
